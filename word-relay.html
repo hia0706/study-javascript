@@ -12,7 +12,17 @@
 		<input type="text">
 		<button>입력</button>
 		<script>
-			
+			const number = parseInt(prompt('몇 명이 참가하나요?'), 10); // 10법으로 치환
+			console.log('number -> ', number);
+			// alert(number); 
+			const yesOrNo = confirm(number + '명이 맞습니까?');	
+			document.querySelector('input').addEventListener('input', function (event) {
+				console.log('글자 입력', event.target.value);
+			});
+			document.querySelector('button').addEventListener('click', function () {
+				console.log('버튼 클릭');
+			});
+
 		</script>
 </body>
 </html>
