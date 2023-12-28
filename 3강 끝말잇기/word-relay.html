@@ -12,17 +12,31 @@
 		<input type="text">
 		<button>입력</button>
 		<script>
-			const number = parseInt(prompt('몇 명이 참가하나요?'), 10); // 10법으로 치환
-			console.log('number -> ', number);
-			// alert(number); 
-			const yesOrNo = confirm(number + '명이 맞습니까?');	
-			document.querySelector('input').addEventListener('input', function (event) {
-				console.log('글자 입력', event.target.value);
-			});
-			document.querySelector('button').addEventListener('click', function () {
-				console.log('버튼 클릭');
-			});
+			const number = Number(prompt('몇 명이 참가하나요?'));
+			const $button = document.querySelector('button');
+			const $input = document.querySelector('input');
+			const $word = document.querySelector('#word');
+			let word; // 제시어
+			let newWord; // 새로 입력한 단어
 
+			const onClickButton = () => {
+				if (!word) {
+					// 비어있을 때
+					word = newWord; // 입력한 단어가 제시어가 된다.
+					$word.textContent = word;
+					$input.value = '';
+					$input.focus();
+				} else {
+					// 비어있지 않을 때
+				}
+			};
+			const onInput = (event) => {
+				newWord = event.target.value;
+			};
+
+			$button.addEventListener('click', onClickButton);
+			$input.addEventListener('input', onInput);
 		</script>
 </body>
+
 </html>
