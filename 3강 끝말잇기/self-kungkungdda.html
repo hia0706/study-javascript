@@ -36,6 +36,15 @@
         let newWord; // 새로 입력한 단어
 
         const onClickButton = () => {
+          
+          const regs = /^[가-힣]+$/;
+          if (!regs.test($input.value)) {
+            alert("한글만 입력가능합니다.");
+            $input.value = "";
+            $input.focus();
+            return;
+          } 
+
           if (!word || (word[word.length - 1] === newWord[0] && newWord.length === 3)) { // 비어있을 때
             word = newWord; // 입력한 단어가 제시어가 된다.
             $word.textContent = word;
@@ -57,9 +66,7 @@
 
         const onInput = (event) => {
           newWord = event.target.value;
-        }
-        $input.value = "";
-        $input.focus();
+        };
 
         $button.addEventListener("click", onClickButton);
         $input.addEventListener("input", onInput);
@@ -67,3 +74,5 @@
     </script>
   </body>
 </html>
+
+// 글자 초과 입력 이벤트
