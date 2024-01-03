@@ -11,7 +11,21 @@
     <input type="text" />
     <button>입력</button>
     <script>
-      const number = Number(prompt("몇 명이 참가하나요?"));
+      let number;
+      const numReg = /^[0-9]+$/;
+
+      const getValidNumber = () => {
+        const input = prompt("몇 명이 참가하나요?");
+
+        if (!input || !numReg.test(input)) {
+          alert("숫자만 입력해주세요.");
+          return getValidNumber();
+        }
+
+        return Number(input);
+      };
+
+      number = getValidNumber();
 
       if (number) {
         const $button = document.querySelector("button");
@@ -35,19 +49,21 @@
             $input.value = "";
             $input.focus();
           } else {
-            // 올바르지 않은가
-            alert("올바르지 않습니다.");
+            alert("제시된 단어 -> \"" + word[word.length - 1] + "\" 로 시작하세요.");
+            $input.value = "";
+            $input.focus();
           }
-          $input.value = "";
-          $input.focus();
-        };
-        const onInput = (event) => {
-          newWord = event.target.value;
         };
 
-      $button.addEventListener("click", onClickButton);
-      $input.addEventListener("input", onInput);
-    }
+        const onInput = (event) => {
+          newWord = event.target.value;
+        }
+        $input.value = "";
+        $input.focus();
+
+        $button.addEventListener("click", onClickButton);
+        $input.addEventListener("input", onInput);
+      } 
     </script>
   </body>
 </html>
