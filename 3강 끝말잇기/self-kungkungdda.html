@@ -66,6 +66,12 @@
 
         const onInput = (event) => {
           newWord = event.target.value;
+
+          if ($input.value.length > 3) {
+            alert("입력가능한 글자 수를 초과하였습니다.");
+            $input.value = "";
+            $input.focus();
+          }
         };
 
         $button.addEventListener("click", onClickButton);
