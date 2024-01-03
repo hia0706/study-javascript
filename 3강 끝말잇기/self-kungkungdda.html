@@ -35,8 +35,11 @@
         let word; // 제시어
         let newWord; // 새로 입력한 단어
 
+        const usedWords = [];
+
         const onClickButton = () => {
           
+          // 한글 검증
           const regs = /^[가-힣]+$/;
           if (!regs.test($input.value)) {
             alert("한글만 입력가능합니다.");
@@ -45,10 +48,19 @@
             return;
           } 
 
+          // 중복단어 검증
+          if (usedWords.includes(newWord)) {
+            alert("\"" + $input.value + "\"는 중복단어입니다. 다시 입력하세요.");
+            $input.value = "";
+            $input.focus();
+            return;
+          }
+
+          usedWords.push(newWord);
+
           if (!word || (word[word.length - 1] === newWord[0] && newWord.length === 3)) { // 비어있을 때
             word = newWord; // 입력한 단어가 제시어가 된다.
             $word.textContent = word;
-
 
             const order = Number($order.textContent);
             if (order + 1 > number) {
@@ -75,6 +87,7 @@
           }
         };
 
+        // 키보드 이벤트
         const onInputKeyPress = (e) => {
           if (e.key === 'Enter') {
             onClickButton();
