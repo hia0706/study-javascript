@@ -49,6 +49,7 @@
             word = newWord; // 입력한 단어가 제시어가 된다.
             $word.textContent = word;
 
+
             const order = Number($order.textContent);
             if (order + 1 > number) {
               $order.textContent = 1;
@@ -74,11 +75,19 @@
           }
         };
 
+        const onInputKeyPress = (e) => {
+          if (e.key === 'Enter') {
+            onClickButton();
+          }
+        }
+
+        $input.value = "";
+        $input.focus();
+
         $button.addEventListener("click", onClickButton);
         $input.addEventListener("input", onInput);
+        $input.addEventListener("keypress", onInputKeyPress);
       } 
     </script>
   </body>
 </html>
-
-// 글자 초과 입력 이벤트
