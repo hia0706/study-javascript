@@ -3,7 +3,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>쿵쿵따</title>
+    <title>끝말잇기</title>
   </head>
   <body>
     <div><span id="order">1</span>번째 참가자</div>
@@ -12,6 +12,8 @@
     <button>입력</button>
     <script>
       const number = Number(prompt("몇 명이 참가하나요?"));
+
+      if (number) {
         const $button = document.querySelector("button");
         const $input = document.querySelector("input");
         const $word = document.querySelector("#word");
@@ -20,7 +22,7 @@
         let newWord; // 새로 입력한 단어
 
         const onClickButton = () => {
-          if (!word || word[word.length - 1] === newWord[0]) { // 비어있을 때
+          if (!word || (word[word.length - 1] === newWord[0] && newWord.length === 3)) { // 비어있을 때
             word = newWord; // 입력한 단어가 제시어가 된다.
             $word.textContent = word;
 
@@ -45,6 +47,7 @@
 
       $button.addEventListener("click", onClickButton);
       $input.addEventListener("input", onInput);
+    }
     </script>
   </body>
 </html>
