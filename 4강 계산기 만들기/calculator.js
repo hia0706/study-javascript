@@ -4,14 +4,16 @@ let numTwo = '';
 const $operator = document.querySelector('#operator');
 const $result = document.querySelector('#result');
 const onClickNumber = (event) => {
-    if (operator) {
-        if (!numTwo) {
-            $result.value = '';
-        }
-        numTwo += event.target.textContent;
-    } else {
+    if (!operator) { // 비어있다
         numOne += event.target.textContent;
+        $result.value += event.target.textContent;
+        return;
     }
+    // 비어있지 않다
+    if (!numTwo) {
+        $result.value = '';
+    }
+    numTwo += event.target.textContent;
     $result.value += event.target.textContent;
 };
 
@@ -38,5 +40,8 @@ document.querySelector('#plus').addEventListener('click', onClickOperator('+'));
 document.querySelector('#minus').addEventListener('click', onClickOperator('-'));
 document.querySelector('#divide').addEventListener('click', onClickOperator('/'));
 document.querySelector('#multiply').addEventListener('click', onClickOperator('x'));
-document.querySelector('#calculate').addEventListener('click', () => {});
-document.querySelector('#clear').addEventListener('click', () => {});
+document.querySelector('#calculate').addEventListener('click', () => {
+
+});
+document.querySelector('#clear').addEventListener('click', () => {
+});
