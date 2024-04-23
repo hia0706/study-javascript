@@ -39,7 +39,7 @@ const onClickOperator = (op) => () => {
 document.querySelector('#plus').addEventListener('click', onClickOperator('+'));
 document.querySelector('#minus').addEventListener('click', onClickOperator('-'));
 document.querySelector('#divide').addEventListener('click', onClickOperator('/'));
-document.querySelector('#multiply').addEventListener('click', onClickOperator('x'));
+document.querySelector('#multiply').addEventListener('click', onClickOperator('*'));
 document.querySelector('#calculate').addEventListener('click', () => {
     if (numTwo) {
         switch (operator) {
