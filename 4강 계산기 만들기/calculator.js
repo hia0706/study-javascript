@@ -61,4 +61,9 @@ document.querySelector('#calculate').addEventListener('click', () => {
     }
 });
 document.querySelector('#clear').addEventListener('click', () => {
+    numOne = '';
+    operator = '';
+    numTwo = '';
+    $operator.value = '';
+    $result.value = '';
 });
