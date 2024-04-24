@@ -4,7 +4,7 @@ let numTwo = '';
 const $operator = document.querySelector('#operator');
 const $result = document.querySelector('#result');
 const onClickNumber = (event) => {
-    if (!operator) { // 비어있다
+    if (!operator) {
         numOne += event.target.textContent;
         $result.value += event.target.textContent;
         return;
