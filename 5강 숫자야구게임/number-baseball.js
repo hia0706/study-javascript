@@ -3,7 +3,7 @@ const $form = document.querySelector("#form");
 const $logs = document.querySelector("#logs");
 
 const numbers = []; // [1, 2, 3, 4, 5, 6, 7, 8, 9]
-for (let n = 0; n <= 9; n++) {
+for (let n = 0; n < 9; n++) {
   numbers.push(n + 1);
 }
 
@@ -34,6 +34,7 @@ $form.addEventListener("submit", (e) => {
   e.preventDefault();
   const value = $input.value;
   $input.value = '';
+  // 오류 발생
   if (!checkInput(value)) {
     return;
   }
@@ -46,5 +47,19 @@ $form.addEventListener("submit", (e) => {
     $logs.appendChild(document.createTextNode(`패배! 정답은 ${answer.join('')}`));
     return;
   }
+  // 몇 볼 몇 스트라이크인지 검사
+  let strike = 0;
+  let ball = 0;
+  for (let i = 0; i < answer.length; i++) {
+    const index = value.indexOf(answer[i]);
+    if (index > -1) { // 일치하는 숫자 발견
+      if (index === i) { // 자릿수 같을 때
+        strike += 1;
+      } else { // 숫자만 같을 때
+        ball += 1;
+      }
+    }
+  }
+  $logs.append(`${value}: ${strike} 스트라이크 ${ball} 볼`, document.createElement('br'));
   tries.push(value);
 });
