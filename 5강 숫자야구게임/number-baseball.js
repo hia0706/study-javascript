@@ -34,9 +34,17 @@ $form.addEventListener("submit", (e) => {
   e.preventDefault();
   const value = $input.value;
   $input.value = '';
-  if (checkInput(value)) { // 문제 없음
-    tries.push(value);
-  } else { // 에러 발생
-
+  if (!checkInput(value)) {
+    return;
   }
+  // 문제 없음
+  if (answer.join('') === value) { // [3, 1, 4, 6] -> '3146' 으로 변환 # join() : 배열을 문자열로 변환하는 함수
+    $logs.textContent = '홈런!';
+    return;
+  }
+  if (tries.length >= 9) {
+    $logs.appendChild(document.createTextNode(`패배! 정답은 ${answer.join('')}`));
+    return;
+  }
+  tries.push(value);
 });
