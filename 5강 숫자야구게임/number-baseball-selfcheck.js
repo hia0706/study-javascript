@@ -31,7 +31,7 @@ function checkInput(input) { // 검사하는 코드
 }
 
 let out = 0;
-$form.addEventListener("submit", (e) => {
+function handleSubmit(e) {
   e.preventDefault();
   const value = $input.value;
   $input.value = '';
@@ -46,6 +46,7 @@ $form.addEventListener("submit", (e) => {
   }
   if (tries.length >= 9) {
     $logs.appendChild(document.createTextNode(`패배! 정답은 ${answer.join('')}`));
+    $form.removeEventListener("submit", handleSubmit);
     return;
   }
   // 몇 볼 몇 스트라이크인지 검사
@@ -69,8 +70,11 @@ $form.addEventListener("submit", (e) => {
   }
   if (out === 3) {
     $logs.append(`패배! 정답은 ${answer.join('')}`);
+    $form.removeEventListener("submit", handleSubmit);
     return;
   }
 
   tries.push(value);
-});
+}
+
+$form.addEventListener("submit", handleSubmit);
