@@ -30,6 +30,12 @@ function checkInput(input) { // 검사하는 코드
   return true;
 }
 
+// 실패 함수
+function defited() {
+  $logs.appendChild(document.createTextNode(`패배! 정답은 ${answer.join('')}`));
+  $form.removeEventListener("submit", handleSubmit);
+}
+
 let out = 0;
 function handleSubmit(e) {
   e.preventDefault();
@@ -45,8 +51,7 @@ function handleSubmit(e) {
     return;
   }
   if (tries.length >= 9) {
-    $logs.appendChild(document.createTextNode(`패배! 정답은 ${answer.join('')}`));
-    $form.removeEventListener("submit", handleSubmit);
+    defited();
     return;
   }
   // 몇 볼 몇 스트라이크인지 검사
@@ -69,11 +74,9 @@ function handleSubmit(e) {
     $logs.append(`${value}: ${strike} 스트라이크 ${ball} 볼`, document.createElement('br'));
   }
   if (out === 3) {
-    $logs.append(`패배! 정답은 ${answer.join('')}`);
-    $form.removeEventListener("submit", handleSubmit);
+    defited();
     return;
   }
-
   tries.push(value);
 }
 
