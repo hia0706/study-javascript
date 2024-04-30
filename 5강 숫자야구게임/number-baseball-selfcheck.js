@@ -37,7 +37,7 @@ function defited() {
 }
 
 let out = 0;
-function handleSubmit(e) {
+function handdleSubmit(e) {
   e.preventDefault();
   const value = $input.value;
   $input.value = '';
@@ -80,4 +80,4 @@ function handleSubmit(e) {
   tries.push(value);
 }
 
-$form.addEventListener("submit", handleSubmit);
+$form.addEventListener("submit", handdleSubmit);
