@@ -2,6 +2,14 @@ const $form = document.querySelector("#form");
 const $result = document.querySelector("#result");
 const $bonus = document.querySelector("#bonus");
 
+// 당첨 번호 함수
+function drawBall($target, value) {
+  const $ball = document.createElement("div");
+  $ball.className = 'ball';
+  $ball.textContent = value;
+  $target.appendChild($ball);
+}
+
 function handdleSubmit(e) {
   e.preventDefault();
   // 검사
@@ -33,22 +41,14 @@ function handdleSubmit(e) {
   const bonus = shuffle[6];
   console.log(winBalls, bonus);
   // 당첨 번호 타이머
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < winBalls.length; i++) {
     setTimeout(() => {
-      const $ball = document.createElement("div");
-      $ball.className = 'ball';
-      $ball.textContent = winBalls[i];
-      $result.appendChild($ball);
-    }, (i + 1) * 1000);
+      drawBall($result, winBalls[i]);
+    }, 1000 * (i + 1));
   }
   setTimeout(() => {
-    const $ball = document.createElement("div");
-    $ball.className = 'ball';
-    $ball.textContent = bonus;
-    console.log($ball);
-    $bonus.appendChild($ball);
+    drawBall($bonus, bonus);
   }, 7000);
-
 }
 
 $form.addEventListener("submit", handdleSubmit);
