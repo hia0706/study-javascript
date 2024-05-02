@@ -32,6 +32,23 @@ function handdleSubmit(e) {
   const winBalls = shuffle.slice(0, 6).sort((a, b) => a - b);
   const bonus = shuffle[6];
   console.log(winBalls, bonus);
+  // 당첨 번호 타이머
+  for (let i = 0; i < 6; i++) {
+    setTimeout(() => {
+      const $ball = document.createElement("div");
+      $ball.className = 'ball';
+      $ball.textContent = winBalls[i];
+      $result.appendChild($ball);
+    }, (i + 1) * 1000);
+  }
+  setTimeout(() => {
+    const $ball = document.createElement("div");
+    $ball.className = 'ball';
+    $ball.textContent = bonus;
+    console.log($ball);
+    $bonus.appendChild($ball);
+  }, 7000);
+
 }
 
 $form.addEventListener("submit", handdleSubmit);
