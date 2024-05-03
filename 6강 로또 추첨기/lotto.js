@@ -1,6 +1,7 @@
 const $form = document.querySelector("#form");
 const $result = document.querySelector("#result");
 const $bonus = document.querySelector("#bonus");
+const $button = document.querySelector("button");
 
 // 당첨 번호 함수
 function drawBall($target, value) {
@@ -29,12 +30,19 @@ function ballColor($target, value) {
   }
 }
 
+function btnReset() {
+  $button.disabled = '';
+  $form.removeEventListener("submit", handdleSubmit);
+}
+
 const setTimeoutPromise = (ms) => new Promise((resolve, reject) => {
   setTimeout(resolve, ms);
 });
 
 async function handdleSubmit(e) {
   e.preventDefault();
+  $button.disabled = 'true';
+
   // 검사
   const string = e.target.input.value; // '1,2,3,4,5,6'
   if (!string.trim()) {
@@ -83,20 +91,26 @@ async function handdleSubmit(e) {
   });
   if (count === 6) {
     alert('1등! 로또 당첨 축하드립니다!');
+    btnReset();
   } else if (count === 5) {
     if (myNumbers.includes(bonus)) {
       alert('2등! 비록 보너스 공이지만 6개를 맞추셨네요!');
+      btnReset();
     } else {
-    alert('3등! 아쉽지만 축하드립니다!');
+      alert('3등! 아쉽지만 축하드립니다!');
+      btnReset();
     }
   } else if (count === 4) {
     alert('4등! 5만원! 축하드립니다.');
+    btnReset();
   } else if (count === 3) {
     alert('5등! 5천원! 다음 기회를 노리세요!');
+    btnReset();
   } else {
     alert('아쉽지만 꽝이에요. 운이 없었네요');
+    btnReset();
   }
 
 }
 
-$form.addEventListener("submit", handdleSubmit);
+$form.addEventListener("submit", handdleSubmit)
