@@ -52,6 +52,9 @@ async function handdleSubmit(e) {
   await setTimeoutPromise(1000);
   drawBall($bonus, bonus);
 
+  // alert -> 보너스 숫자 버그 해결
+  await setTimeoutPromise(0);
+
   // 등 수 표시
   let count = 0;
   myNumbers.forEach((my) => {
