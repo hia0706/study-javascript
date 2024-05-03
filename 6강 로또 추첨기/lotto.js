@@ -8,6 +8,25 @@ function drawBall($target, value) {
   $ball.className = 'ball';
   $ball.textContent = value;
   $target.appendChild($ball);
+
+  ballColor($ball, value);
+}
+
+function ballColor($target, value) {
+  if (value < 10) { // red , white
+    $target.style.backgroundColor = 'red';
+    $target.style.color = 'white';
+  } else if (value < 20) { // orange
+    $target.style.backgroundColor = 'orange';
+  } else if (value < 30) { // yello
+    $target.style.backgroundColor = 'yello';
+  } else if (value < 40) { // blue , white
+    $target.style.backgroundColor = 'blue';
+    $target.style.color = 'white';
+  } else if (value >= 40) { // green , white
+    $target.style.backgroundColor = 'red';
+    $target.style.color = 'white';
+  }
 }
 
 const setTimeoutPromise = (ms) => new Promise((resolve, reject) => {
