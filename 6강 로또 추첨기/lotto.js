@@ -10,7 +10,11 @@ function drawBall($target, value) {
   $target.appendChild($ball);
 }
 
-function handdleSubmit(e) {
+const setTimeoutPromise = (ms) => new Promise((resolve, reject) => {
+  setTimeout(resolve, ms);
+})
+
+async function handdleSubmit(e) {
   e.preventDefault();
   // 검사
   const string = e.target.input.value; // '1,2,3,4,5,6'
@@ -42,13 +46,11 @@ function handdleSubmit(e) {
   console.log(winBalls, bonus);
   // 당첨 번호 타이머
   for (let i = 0; i < winBalls.length; i++) {
-    setTimeout(() => {
-      drawBall($result, winBalls[i]);
-    }, 1000 * (i + 1));
+    await setTimeoutPromise(1000);
+    drawBall($result, winBalls[i]);
   }
-  setTimeout(() => {
-    drawBall($bonus, bonus);
-  }, 7000);
+  await setTimeoutPromise(1000);
+  drawBall($bonus, bonus);
 }
 
 $form.addEventListener("submit", handdleSubmit);
