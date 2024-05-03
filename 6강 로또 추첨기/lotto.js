@@ -1,7 +1,6 @@
 const $form = document.querySelector("#form");
 const $result = document.querySelector("#result");
 const $bonus = document.querySelector("#bonus");
-const $button = document.querySelector("button");
 
 // 당첨 번호 함수
 function drawBall($target, value) {
@@ -13,35 +12,37 @@ function drawBall($target, value) {
   ballColor($ball, value);
 }
 
-function ballColor($target, value) {
+function ballColor($tag, value) {
   if (value < 10) { // red , white
-    $target.style.backgroundColor = 'red';
-    $target.style.color = 'white';
+    $tag.style.backgroundColor = 'red';
+    $tag.style.color = 'white';
   } else if (value < 20) { // orange
-    $target.style.backgroundColor = 'orange';
+    $tag.style.backgroundColor = 'orange';
   } else if (value < 30) { // yello
-    $target.style.backgroundColor = 'yellow';
+    $tag.style.backgroundColor = 'yellow';
   } else if (value < 40) { // blue , white
-    $target.style.backgroundColor = 'blue';
-    $target.style.color = 'white';
-  } else if (value >= 40) { // green , white
-    $target.style.backgroundColor = 'red';
-    $target.style.color = 'white';
+    $tag.style.backgroundColor = 'blue';
+    $tag.style.color = 'white';
+  } else { // green , white
+    $tag.style.backgroundColor = 'green';
+    $tag.style.color = 'white';
   }
 }
 
-function btnReset() {
-  $button.disabled = '';
-  $form.removeEventListener("submit", handdleSubmit);
-}
-
-const setTimeoutPromise = (ms) => new Promise((resolve, reject) => {
+const setTimeoutPromise = (ms) => new Promise((resolve) => {
   setTimeout(resolve, ms);
 });
 
+let clicked = false;
 async function handdleSubmit(e) {
   e.preventDefault();
-  $button.disabled = 'true';
+
+  if (clicked) {
+    return;
+  }
+  clicked = true;
+  $result.innerHTML = '당첨 숫자: ';
+  $bonus.innerHTML = '보너스 숫자: ';
 
   // 검사
   const string = e.target.input.value; // '1,2,3,4,5,6'
@@ -67,7 +68,6 @@ async function handdleSubmit(e) {
     const value = spliceArray[0]; // 새로운 배열에 들어 있는 값 꺼내기
     shuffle.push(value); // 꺼낸 값을 shuffle 배열에 넣기
   }
-  console.log(shuffle);
   const winBalls = shuffle.slice(0, 6).sort((a, b) => a - b);
   const bonus = shuffle[6];
   console.log(winBalls, bonus);
@@ -91,26 +91,20 @@ async function handdleSubmit(e) {
   });
   if (count === 6) {
     alert('1등! 로또 당첨 축하드립니다!');
-    btnReset();
   } else if (count === 5) {
     if (myNumbers.includes(bonus)) {
       alert('2등! 비록 보너스 공이지만 6개를 맞추셨네요!');
-      btnReset();
     } else {
       alert('3등! 아쉽지만 축하드립니다!');
-      btnReset();
     }
   } else if (count === 4) {
     alert('4등! 5만원! 축하드립니다.');
-    btnReset();
   } else if (count === 3) {
     alert('5등! 5천원! 다음 기회를 노리세요!');
-    btnReset();
   } else {
     alert('아쉽지만 꽝이에요. 운이 없었네요');
-    btnReset();
   }
-
+  clicked = false;
 }
 
-$form.addEventListener("submit", handdleSubmit)
+$form.addEventListener("submit", handdleSubmit);
