@@ -19,7 +19,7 @@ function ballColor($target, value) {
   } else if (value < 20) { // orange
     $target.style.backgroundColor = 'orange';
   } else if (value < 30) { // yello
-    $target.style.backgroundColor = 'yello';
+    $target.style.backgroundColor = 'yellow';
   } else if (value < 40) { // blue , white
     $target.style.backgroundColor = 'blue';
     $target.style.color = 'white';
@@ -31,7 +31,7 @@ function ballColor($target, value) {
 
 const setTimeoutPromise = (ms) => new Promise((resolve, reject) => {
   setTimeout(resolve, ms);
-})
+});
 
 async function handdleSubmit(e) {
   e.preventDefault();
