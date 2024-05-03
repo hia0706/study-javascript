@@ -51,6 +51,30 @@ async function handdleSubmit(e) {
   }
   await setTimeoutPromise(1000);
   drawBall($bonus, bonus);
+
+  // 등 수 표시
+  let count = 0;
+  myNumbers.forEach((my) => {
+    if (winBalls.includes(my)) {
+      count++;
+    }
+  });
+  if (count === 6) {
+    alert('1등! 로또 당첨 축하드립니다!');
+  } else if (count === 5) {
+    if (myNumbers.includes(bonus)) {
+      alert('2등! 비록 보너스 공이지만 6개를 맞추셨네요!');
+    } else {
+    alert('3등! 아쉽지만 축하드립니다!');
+    }
+  } else if (count === 4) {
+    alert('4등! 5만원! 축하드립니다.');
+  } else if (count === 3) {
+    alert('5등! 5천원! 다음 기회를 노리세요!');
+  } else {
+    alert('아쉽지만 꽝이에요. 운이 없었네요');
+  }
+
 }
 
 $form.addEventListener("submit", handdleSubmit);
